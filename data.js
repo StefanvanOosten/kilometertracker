@@ -6,7 +6,9 @@ const BIBLIOTHEEK = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/+
 const FOUTEN = {
   'Invalid login credentials': 'E-mailadres of wachtwoord klopt niet',
   'Email not confirmed': 'Bevestig eerst je e-mailadres via de mail die je hebt gekregen',
-  'User already registered': 'Dit e-mailadres heeft al een account',
+  'User already registered': 'Dit e-mailadres heeft al een account. Log in met je bestaande wachtwoord.',
+  'rate limit': 'Er zijn te veel mails verstuurd. Probeer het over een uur opnieuw.',
+  'not authorized': 'Supabase mag naar dit e-mailadres (nog) geen mail sturen',
   'Signups not allowed for this instance': 'Nieuwe accounts zijn uitgeschakeld',
   'Onbekende code': 'Deze deelcode bestaat niet',
 };
@@ -56,6 +58,10 @@ export async function registreren(email, wachtwoord) {
   const data = check(await (await client()).auth.signUp({
     email, password: wachtwoord, options: { emailRedirectTo: location.origin + location.pathname },
   }));
+  // Supabase meldt een bestaand adres niet als fout, maar geeft een gebruiker zonder identiteiten terug.
+  if (!data.session && data.user && (data.user.identities ?? []).length === 0) {
+    throw new Error('User already registered');
+  }
   return data.session ? data.user : null;
 }
 

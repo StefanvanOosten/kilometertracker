@@ -1,6 +1,6 @@
 // Haalt eerst de nieuwste versie op, zodat updates direct doorkomen,
 // en valt zonder internet terug op de laatst bewaarde versie.
-const CACHE = 'kilometertracker-v1';
+const CACHE = 'kilometertracker-v2';
 const BESTANDEN = [
   './', 'index.html', 'styles.css', 'app.js', 'logic.js', 'data.js', 'ocr.js', 'config.js', 'manifest.webmanifest',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable-512.png',
