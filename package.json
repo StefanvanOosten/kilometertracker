@@ -1,0 +1,10 @@
+{
+  "name": "kilometertracker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "start": "python -m http.server 8124",
+    "icons": "node tools/make-icons.mjs"
+  }
+}

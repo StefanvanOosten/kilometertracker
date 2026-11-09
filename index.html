@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>KilometerTracker</title>
+  <meta name="description" content="Samen één auto: kilometers bijhouden en tankbeurten eerlijk verdelen.">
+  <meta name="theme-color" content="#f3f6fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)">
+  <script>
+    // Voor de stylesheet, zodat de app niet eerst in de verkeerde kleur oplicht.
+    try {
+      const thema = localStorage.getItem('km-thema');
+      if (thema === 'light' || thema === 'dark') document.documentElement.dataset.theme = thema;
+    } catch {}
+  </script>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="view" class="view"></main>
+
+  <nav id="nav" class="nav" aria-label="Hoofdmenu" hidden>
+    <button class="nav-knop" data-tab="ritten">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 9 5M19 19 15 5M12 6v2M12 11v2M12 16v2"/></svg>
+      <span>Ritten</span>
+    </button>
+    <button class="nav-knop" data-tab="tanken">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M4 10h10M14 8h2.5A1.5 1.5 0 0 1 18 9.5V16a1.5 1.5 0 0 0 3 0V8l-3-3"/></svg>
+      <span>Tanken</span>
+    </button>
+    <button class="fab" data-actie="nieuw" aria-label="Toevoegen">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+    </button>
+    <button class="nav-knop" data-tab="saldo">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h13l-3-3M21 17H8l3 3"/></svg>
+      <span>Verrekenen</span>
+    </button>
+    <button class="nav-knop" data-tab="meer">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg>
+      <span>Auto</span>
+    </button>
+  </nav>
+
+  <dialog id="sheet" class="sheet"></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <input id="camera" type="file" accept="image/*" capture="environment" hidden>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
